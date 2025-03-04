@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:web_socket_channel/status.dart' as status;
+import 'dart:convert';
 
 void main() {
   runApp(MyApp());
-  var socket = IO.io('ws://0.0.0.0:8080/app/x2bt1zyakor8axdpksb5', {
-    "transport": ["websocket"],
-    "autoConnect": false,
-  });
-  socket.connect();
 
-  print('before');
-  print('hellow');
-  print('the socket is ${socket.connected}');
-  print('after');
+ 
+  
+ 
 }
 
 class MyApp extends StatelessWidget {
@@ -125,7 +122,30 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed:(){
+
+           final wsUrl = 'ws://127.0.0.1:9000/app/x2bt1zyakor8axdpksb5';
+          final channel = WebSocketChannel.connect(Uri.parse(wsUrl));
+          final subscription = {
+            "event": "pusher:subscribe",
+            "data": {"channel": "test-channel"}
+          };
+          channel.sink.add(jsonEncode(subscription));
+          channel.stream.listen(
+            (message) {
+              print('Received: $message');
+            },
+            onDone: () {
+              print('Connection closed.');
+            },
+            onError: (error) {
+              print('Error: $error');
+            },
+          );
+ 
+
+
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
