@@ -6,7 +6,7 @@ sealed class ChatState {}
 final class ChatInitialState extends ChatState {}
 
 final class ChatLoadedSuccssState extends ChatState {
-   final List messages;
+   final List<Message> messages;
 
   ChatLoadedSuccssState({required this.messages});
 

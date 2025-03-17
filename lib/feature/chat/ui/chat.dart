@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagramclone/feature/chat/bloc/chat_bloc.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
 import 'dart:convert';
-
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -44,65 +45,25 @@ class _MyHomePageState extends State<MyHomePage> {
       onError: (error) => print('Error: $error'),
     );
 
+      BlocProvider.of<ChatBloc>(context).add(ChatInitialEvent());
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.all(16.0),
-              children: const [
-                Text('Hello World'), // Fixed typo and added proper styling
-                // Add more message widgets here as needed
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: textController,
-                    decoration: InputDecoration(
-                      labelText: 'Type your message',
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8.0),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 24.0),
-                  ),
-                  onPressed: () {
-                    final smessage = {
-                      "event": "client-TestEvent", // Note the "client-" prefix
-                      "channel":
-                          "test-channel", // Use private/presence channel for client events
-                      "data": {
-                        "message": textController.text,
-                        "sender": "flutter_user"
-                      }
-                    };
-                    channel.sink.add(jsonEncode(smessage));
-                  },
-                  child: const Text('Send'),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+    return BlocConsumer<ChatBloc, ChatState>(
+        builder: (context, state) {
+          if (state is ChatInitialState) {
+            return Scaffold(
+                appBar: AppBar(title: Text('Chat')),
+                body: Center(child: CircularProgressIndicator()));
+          } else {
+            return Scaffold(
+                appBar: AppBar(title: Text('Chat')),
+                body: Text(' something went wrong while loading messages'));
+          }
+        },
+        listener: (context, state) {});
   }
 }
