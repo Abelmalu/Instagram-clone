@@ -12,14 +12,13 @@ part 'chat_event.dart';
 part 'chat_state.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
-   static const wsUrl = 'ws://127.0.0.1:9000/app/buwwgidiaivdzinfonqa';
+  static const wsUrl = 'ws://127.0.0.1:9000/app/buwwgidiaivdzinfonqa';
   late final WebSocketChannel channel;
   ChatBloc() : super(ChatInitialState()) {
-      _initializeWebSocket();
+    _initializeWebSocket();
     on<ChatInitialEvent>(chatInitialEvent);
     on<SendButtonPressedEvent>(sendButtonPressedEvent);
   }
-  
 
   void _initializeWebSocket() {
     channel = WebSocketChannel.connect(Uri.parse(wsUrl));
@@ -52,10 +51,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   FutureOr<void> chatInitialEvent(
       ChatEvent event, Emitter<ChatState> emit) async {
     emit(ChatInitialState());
-    
 
     try {
-      final response = await http.get(Uri.parse(AppConstants.baseUrl));
+      final response =
+          await http.get(Uri.parse('${AppConstants.baseUrl}/chatmessages'));
       print('');
 
       final result = jsonDecode(response.body);
@@ -75,5 +74,12 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   }
 
   FutureOr<void> sendButtonPressedEvent(
-      SendButtonPressedEvent event, Emitter<ChatState> emit) {}
+      SendButtonPressedEvent event, Emitter<ChatState> emit) async {
+        print(event.message);
+    final response = await http.post(
+        Uri.parse('${AppConstants.baseUrl}/message'),
+        body: {"text": event.message});
+    final result = jsonDecode(response.body);
+    print(result);
+  }
 }

@@ -95,18 +95,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                 vertical: 16.0, horizontal: 24.0),
                           ),
                           onPressed: () {
-                            print('fuck');
-                            // final smessage = {
-                            //   "event":
-                            //       "client-TestEvent", // Note the "client-" prefix
-                            //   "channel":
-                            //       "test-channel", // Use private/presence channel for client events
-                            //   "data": {
-                            //     "message": textController.text,
-                            //     "sender": "flutter_user"
-                            //  }
-                            // };
-                            // channel.sink.add(jsonEncode(smessage));
+                            print(textController.text);
+                            context.read<ChatBloc>().add(SendButtonPressedEvent(
+                                message: textController.text));
                           },
                           child: const Text('Send'),
                         ),
