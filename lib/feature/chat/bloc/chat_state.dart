@@ -11,7 +11,8 @@ final class ChatLoadedSuccssState extends ChatState {
   ChatLoadedSuccssState({required this.messages});
 }
 
+final class SendButtonPressedState extends ChatState {
+  final String newMessage;
 
-final class SendButtonPressedState extends ChatState{
-  
+  SendButtonPressedState({required this.newMessage});
 }

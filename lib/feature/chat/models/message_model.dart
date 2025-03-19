@@ -1,14 +1,14 @@
 
 class Message {
    
-    int id;
+    int? id;
   
     String text;
    
    
 
     Message({
-        required this.id,
+         this.id,
         required this.text,
      
     });

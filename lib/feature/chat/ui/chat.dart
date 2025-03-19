@@ -98,7 +98,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             print(textController.text);
                             context.read<ChatBloc>().add(SendButtonPressedEvent(
                                 message: textController.text));
+                                textController.clear();
                           },
+                          
                           child: const Text('Send'),
                         ),
                       ],
