@@ -12,7 +12,7 @@ part 'chat_event.dart';
 part 'chat_state.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
-  static const wsUrl = 'ws://127.0.0.1:9000/app/buwwgidiaivdzinfonqa';
+  static const wsUrl = 'ws://192.168.1.5:9000/app/buwwgidiaivdzinfonqa';
   late final WebSocketChannel channel;
   List<Message> fetchedMessages = [];
 
@@ -36,24 +36,26 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     channel.stream.listen(
       (message) {
         final jsonMessage = jsonDecode(message);
-        print('Received: ${jsonMessage['data']}');
+        if (jsonMessage['event'] == 'pusher:ping') {
+          channel.sink.add(jsonEncode({'event': 'pusher:pong', 'data': {}}));
+        }
+        print('Received: ${jsonMessage}');
         final value = jsonDecode(jsonMessage['data']);
 
-        print('the value is ${value}');
+        // print('the value is ${value}');
         final mapye = value[0] as Map<String, dynamic>;
-          print('the map is ${mapye}');
+        // print('the map is ${mapye}');
 
+        if (mapye.isNotEmpty) {
+          final newMessage = Message.fromJson(mapye);
 
-        final newMessage = Message.fromJson(mapye);
+          add(NewMessageReceivedEvent(message: newMessage));
+        }
 
-        add(NewMessageReceivedEvent(message: newMessage));
         if (jsonMessage['event'] == 'GotMessage') {
           // Add logic to handle received messages
 
           print('Actual message received');
-        }
-        if (jsonMessage['event'] == 'pusher:ping') {
-          channel.sink.add(jsonEncode({'event': 'pusher:pong', 'data': {}}));
         }
       },
       onDone: () => print('Connection closed.'),
@@ -91,7 +93,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       SendButtonPressedEvent event, Emitter<ChatState> emit) async {
     print(event.message);
     final response = await http.post(
-        Uri.parse('${AppConstants.baseUrl}/message'),
+        Uri.parse('http://192.168.1.5:8000/api/message'),
         body: {"text": event.message});
     final result = jsonDecode(response.body);
     print(result);
