@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:instagramclone/util/app_constants.dart';
@@ -19,9 +20,23 @@ class AuthenticationBloc
     emit(AuthenticationInitialState());
   }
 
-  FutureOr<void> registerButtonPressedEvent(
-      RegisterButtonPressedEvent event, Emitter<AuthenticationState> emit) {
+  FutureOr<void> registerButtonPressedEvent(RegisterButtonPressedEvent event,
+      Emitter<AuthenticationState> emit) async {
     emit(RegisterLoadingState());
-    final url = Uri.parse(AppConstants.baseUrl);
+    final url = Uri.parse('${AppConstants.baseUrl}/register');
+
+    try {
+      final response = await http.post(url, body: {
+        "name": event.fullName,
+        "username": event.userName,
+        "identifier": event.identifier,
+        "password": event.password,
+        "password_confirmation": event.passwordConfirmation
+      });
+
+      print(jsonDecode(response.body));
+    } catch (e) {
+      print('the registration error is $e');
+    }
   }
 }

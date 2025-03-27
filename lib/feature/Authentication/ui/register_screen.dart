@@ -10,6 +10,12 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  TextEditingController identifierController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordConfirmationController =
+      TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
@@ -32,19 +38,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: [
                 Text('Instagram'),
                 TextField(
+                  controller: identifierController,
                   decoration:
                       InputDecoration(labelText: 'Mobile number or Email'),
                 ),
                 TextField(
+                  controller: fullNameController,
                   decoration: InputDecoration(labelText: 'Full Name'),
                 ),
                 TextField(
+                  controller: userNameController,
                   decoration: InputDecoration(labelText: 'Username'),
                 ),
                 TextField(
+                  controller: passwordController,
                   decoration: InputDecoration(labelText: 'Password'),
                 ),
                 TextField(
+                  controller: passwordConfirmationController,
                   decoration: InputDecoration(labelText: 'Confirm Password'),
                 ),
                 SizedBox(
@@ -53,17 +64,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Container(
                   width: 300,
                   child: ElevatedButton(
-                    child: (state is RegisterLoadingState ? CircularProgressIndicator():
-                        Text('Register', style: TextStyle(color: Colors.white))),
+                    child: (state is RegisterLoadingState
+                        ? CircularProgressIndicator()
+                        : Text('Register',
+                            style: TextStyle(color: Colors.white))),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
-                        padding: EdgeInsets.only(top:20,bottom: 20, right:0,left: 0),
+                      padding: EdgeInsets.only(
+                          top: 20, bottom: 20, right: 0, left: 0),
                     ),
                     onPressed: () {
                       context.read<AuthenticationBloc>().add(
-                        RegisterButtonPressedEvent()
-                      );
-                     
+                          RegisterButtonPressedEvent(
+                              identifier: identifierController.text,
+                              fullName: fullNameController.text,
+                              userName: userNameController.text,
+                              password: passwordController.text,
+                              passwordConfirmation:
+                                  passwordConfirmationController.text));
                     },
                   ),
                 )

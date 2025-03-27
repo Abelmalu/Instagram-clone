@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagramclone/feature/Authentication/bloc/authentication_bloc.dart';
+import 'package:instagramclone/feature/Authentication/ui/payment_screen.dart';
 import 'package:instagramclone/feature/Authentication/ui/register_screen.dart';
 import 'package:instagramclone/feature/chat/bloc/chat_bloc.dart';
-
 import 'feature/chat/ui/chat.dart';
 
 void main() {
@@ -32,3 +32,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+  
