@@ -35,6 +35,8 @@ class AuthenticationBloc
       });
 
       print(jsonDecode(response.body));
+
+      emit(RegisterSuccessState());
     } catch (e) {
       print('the registration error is $e');
     }

@@ -4,6 +4,7 @@ import 'package:instagramclone/feature/Authentication/bloc/authentication_bloc.d
 import 'package:instagramclone/feature/Authentication/ui/payment_screen.dart';
 import 'package:instagramclone/feature/Authentication/ui/register_screen.dart';
 import 'package:instagramclone/feature/chat/bloc/chat_bloc.dart';
+import 'package:instagramclone/feature/post/ui/posts_screen.dart';
 import 'feature/chat/ui/chat.dart';
 
 void main() {
@@ -28,6 +29,10 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: const RegisterScreen(),
+        routes: {
+          PostsScreen.routeName:(context)=>PostsScreen(),
+
+        },
       ),
     );
   }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagramclone/feature/Authentication/bloc/authentication_bloc.dart';
 
+import '../../post/ui/posts_screen.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -20,7 +22,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
-        // TODO: implement listener
+        if (state is RegisterSuccessState) {
+          Navigator.of(context).pushNamed(PostsScreen.routeName);
+        }
       },
       builder: (context, state) {
         // if (state is RegisterInitialState){
