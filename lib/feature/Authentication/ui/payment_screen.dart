@@ -30,8 +30,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
           context: context, // context
           publicKey: 'CHAPUBK_TEST-bE5SJ764BOpsws2ARXPvpdYzoMJ9aP2a',
           currency: 'ETB',
-          amount: '1',
-          email: 'fetan@chapa.co',
+          amount: '10',
+          email: 'abellmalu@gmail.com',
           phone: '0900112233',
           firstName: 'Abel',
           nativeCheckout: true,

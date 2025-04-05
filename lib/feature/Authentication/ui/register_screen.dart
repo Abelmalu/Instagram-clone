@@ -70,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: ElevatedButton(
                     child: (state is RegisterLoadingState
                         ? CircularProgressIndicator()
-                        : Text('Register',
+                        :  Text('Register',
                             style: TextStyle(color: Colors.white))),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
