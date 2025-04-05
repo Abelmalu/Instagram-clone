@@ -19,7 +19,8 @@ class _PostsScreenState extends State<PostsScreen> {
       
       ),
       body:Column(children:[
-        Text('Abebe ')
+        Text('Abebe '),
+        Text('hellow')
       ])
 
     );
