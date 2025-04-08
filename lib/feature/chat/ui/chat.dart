@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context, state) {
           if (state is ChatInitialState) {
             return Scaffold(
-                appBar: AppBar(title: Text('Chat')),
+                appBar: AppBar(title: Text('Public Chat')),
                 body: Center(child: CircularProgressIndicator()));
           } else if (state is ChatLoadedSuccssState) {
             final successState = state as ChatLoadedSuccssState;
