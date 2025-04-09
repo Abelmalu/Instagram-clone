@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AuthenticationBloc()),
       ],
       child: MaterialApp(
-        title: 'Chat Application',
+        title: 'Chat Application ',
         debugShowCheckedModeBanner: false,
         color: Colors.green,
         theme: ThemeData(
