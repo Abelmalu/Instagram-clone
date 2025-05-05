@@ -13,12 +13,12 @@ class _PostsScreenState extends State<PostsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      appBar: AppBar(title:Text('Posts '),
+      appBar: AppBar(title:const Text('Posts '),
 
 
       
       ),
-      body:Column(children:[
+      body:const Column(children:[
         Text('Abebe '),
         Text('hellow')
       ])

@@ -9,4 +9,4 @@ final class RegisterLoadingState extends AuthenticationInitialState{}
 
 final class RegisterSuccessState extends AuthenticationInitialState {}
 
-final class RegisterErrorState extends AuthenticationInitialState {}
+final class RegisterErrorState   extends AuthenticationInitialState {}

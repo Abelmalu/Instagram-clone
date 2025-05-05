@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         ),
         home: const RegisterScreen(),
         routes: {
-          PostsScreen.routeName:(context)=>PostsScreen(),
+          PostsScreen.routeName:(context)=>const PostsScreen(),
 
         },
       ),

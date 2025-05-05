@@ -39,6 +39,8 @@ class AuthenticationBloc
       emit(RegisterSuccessState());
     } catch (e) {
       print('the Registration error is $e');
+
+      emit(RegisterErrorState());
     }
   }
 }

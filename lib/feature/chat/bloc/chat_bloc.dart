@@ -39,7 +39,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         if (jsonMessage['event'] == 'pusher:ping') {
           channel.sink.add(jsonEncode({'event': 'pusher:pong', 'data': {}}));
         }
-        print('Received: ${jsonMessage}');
+        print('Received: $jsonMessage');
         final value = jsonDecode(jsonMessage['data']);
 
         // print('the value is ${value}');

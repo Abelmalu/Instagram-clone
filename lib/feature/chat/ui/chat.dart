@@ -56,13 +56,13 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context, state) {
           if (state is ChatInitialState) {
             return Scaffold(
-                appBar: AppBar(title: Text('Public Chat')),
-                body: Center(child: CircularProgressIndicator()));
+                appBar: AppBar(title: const Text('Public Chat')),
+                body: const Center(child: CircularProgressIndicator()));
           } else if (state is ChatLoadedSuccssState) {
-            final successState = state as ChatLoadedSuccssState;
+            final successState = state;
             return Scaffold(
               appBar: AppBar(
-                title: Text('Chat'),
+                title: const Text('Chat'),
               ),
               body: Column(
                 children: [
@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         Expanded(
                           child: TextField(
                             controller: textController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Type your message',
                               border: OutlineInputBorder(),
                               contentPadding:
@@ -111,8 +111,8 @@ class _MyHomePageState extends State<MyHomePage> {
             );
           } else {
             return Scaffold(
-                appBar: AppBar(title: Text('Chat')),
-                body: Text(' something went wrong while loading messages'));
+                appBar: AppBar(title: const Text('Chat')),
+                body: const Text(' something went wrong while loading messages'));
           }
         },
         listener: (context, state) {});

@@ -36,45 +36,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
         return Scaffold(
           body: Container(
             width: double.infinity,
-            margin: EdgeInsets.all(50),
+            margin: const EdgeInsets.all(50),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text('Instagram'),
+                const Text('Instagram'),
                 TextField(
                   controller: identifierController,
                   decoration:
-                      InputDecoration(labelText: 'Mobile number or Email'),
+                      const InputDecoration(labelText: 'Mobile number or Email'),
                 ),
                 TextField(
                   controller: fullNameController,
-                  decoration: InputDecoration(labelText: 'Full Name'),
+                  decoration: const InputDecoration(labelText: 'Full Name'),
                 ),
                 TextField(
                   controller: userNameController,
-                  decoration: InputDecoration(labelText: 'Username'),
+                  decoration: const InputDecoration(labelText: 'Username'),
                 ),
                 TextField(
                   controller: passwordController,
-                  decoration: InputDecoration(labelText: 'Password'),
+                  decoration: const InputDecoration(labelText: 'Password'),
                 ),
                 TextField(
                   controller: passwordConfirmationController,
-                  decoration: InputDecoration(labelText: 'Confirm Password'),
+                  decoration: const InputDecoration(labelText: 'Confirm Password'),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                Container(
+                SizedBox(
                   width: 300,
                   child: ElevatedButton(
-                    child: (state is RegisterLoadingState
-                        ? CircularProgressIndicator()
-                        :  Text('Register',
-                            style: TextStyle(color: Colors.white))),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                           top: 20, bottom: 20, right: 0, left: 0),
                     ),
                     onPressed: () {
@@ -87,6 +83,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               passwordConfirmation:
                                   passwordConfirmationController.text));
                     },
+                    child: (state is RegisterLoadingState
+                        ? CircularProgressIndicator()
+                        :  Text('Register',
+                            style: TextStyle(color: Colors.white))),
                   ),
                 )
               ],
